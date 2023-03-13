@@ -40,7 +40,7 @@
                                 <td class="whitespace-nowrap py-4 pl-4 text-sm sm:pl-0">
                                     <div class="flex items-center">
                                         <div class="h-10 w-10 flex-shrink-0">
-                                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                            <img class="h-10 w-10 rounded-full" src="{{ $user->profile_photo_url }}" alt="">
                                         </div>
                                         <div class="ml-4">
                                             <div class="font-medium text-gray-900">{{ $user->name }}</div>
@@ -75,7 +75,7 @@
                                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                   <span class="relative inline-flex rounded-full h-3 w-3 bg-green-400"></span>
                                 </span>
-                                <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="" class="w-10 sm:w-16 h-10 sm:h-16 rounded-full">
+                                <img src="{{ request()->user()->profile_photo_url }}" alt="" class="w-10 sm:w-16 h-10 sm:h-16 rounded-full">
                             </div>
                             <div class="flex flex-col leading-tight">
                                 <div class="text-2xl mt-1 flex items-center">
@@ -103,7 +103,7 @@
                                         <div class="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start">
                                             <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">{{ $dbMessage->message }}</span></div>
                                         </div>
-                                        <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="w-6 h-6 rounded-full order-1">
+                                        <img src="{{ $dbMessage->user->profile_photo_url }}" alt="My profile" class="w-6 h-6 rounded-full order-1">
                                     </div>
                                     <div class="text-xs text-gray-500 flex pl-8 pt-1"> {{ $dbMessage->user->name }}</div>
                                 </div>
@@ -115,7 +115,7 @@
                                             <div><span class="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">{{ $dbMessage->message }}</span></div>
                                         </div>
 
-                                        <img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="w-6 h-6 rounded-full order-2">
+                                        <img src="{{ $dbMessage->user->profile_photo_url }}" alt="My profile" class="w-6 h-6 rounded-full order-2">
                                     </div>
                                     <div class="text-xs text-gray-500 flex justify-end pr-8 pt-1"> {{ $dbMessage->user->name }}</div>
                                 </div>
@@ -125,7 +125,7 @@
                     <div class="flex border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0 items-center w-full">
 
                         <div class="mt-2 w-11/12">
-                            <input wire:model="message" wire:keydown.enter="sendMessage" type="email" name="email" id="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Type your message here ...">
+                            <input wire:model="message" wire:keydown.enter="sendMessage" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-3" placeholder="Type your message here ...">
                         </div>
 
                         <div class="mt-2 w-1/12">
@@ -137,9 +137,9 @@
                             </button>
                         </div>
 
-                        <div class="pt-2">
-                            @error('message') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
-                        </div>
+                    </div>
+                    <div class="pl-4 pt-2">
+                        @error('message') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
