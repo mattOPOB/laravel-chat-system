@@ -33,6 +33,9 @@ class Messaging extends Component
 
     public function refreshChat($payload) {
         $messageToAdd = Message::find($payload['message']);
+
+        // Initially queried the DB for all messages here.
+        // To improve efficiency the new message is just pushed to the message array.
         $this->dbMessages[] = $messageToAdd;
     }
 

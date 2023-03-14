@@ -1,4 +1,4 @@
-<div>
+<div class="">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Messaging') }}
@@ -64,7 +64,7 @@
             </button>
         </div>
 
-        <div class="sm:px-6 lg:px-8 w-full">
+        <div class="sm:px-6 lg:px-8 w-full h-max">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 <div class="flex-1 p:2 sm:p-6 justify-between flex flex-col h-full w-full">
@@ -87,7 +87,7 @@
                     </div>
 
 
-                    <div id="messages" class="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                    <div id="messages" class="flex flex-col max-h-[50rem] space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
                         @if(count($dbMessages) < 1)
                             <div class="flex justify-center">
                                 <div class="space-x-auto text-blue-500 justify-center animate-pulse">
