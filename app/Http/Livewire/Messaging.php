@@ -35,8 +35,9 @@ class Messaging extends Component
         $messageToAdd = Message::find($payload['message']);
 
         // Initially queried the DB for all messages here.
-        // To improve efficiency the new message is just pushed to the message array.
+        // To improve efficiency the new message is just pushed to the class message array.
         $this->dbMessages[] = $messageToAdd;
+
     }
 
     public function sendMessage(){
@@ -49,9 +50,15 @@ class Messaging extends Component
 
         $this->dbMessages[] = $message;
 
+        // Event that will be broadcasted on the application pusher channel
         broadcast(new MessageSent($this->userId, $message->id))->toOthers();
 
         $this->message = '';
+
+        // This event will be picked up by the browser and scroll to bottom of chat page
+        // The user will see the latest messages first
+        $this->dispatchBrowserEvent('scrollDown');
+
     }
 
     public function render()

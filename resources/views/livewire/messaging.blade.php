@@ -146,8 +146,17 @@
 
             </div>
         </div>
+        <script>
+
+            // Scroll to bottom of chat page so user can see the latest messages first
+
+            let scroll_to_bottom = document.getElementById('messages');
+            scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+
+            window.addEventListener('scrollDown', function() {
+                scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+            });
+
+        </script>
     </div>
-
-
-
 </div>
