@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\MessageDeleted;
 use App\Events\MessageSent;
 use App\Models\Message;
 use App\Models\User;
@@ -18,7 +19,8 @@ class Messaging extends Component
     public $users;
 
     protected $listeners = [
-        'echo-private:laravel-chat,.MessageSent' => 'refreshChat'
+        'echo-private:laravel-chat,.MessageSent' => 'refreshChat',
+        'echo-private:laravel-chat,.MessageDeleted' => 'refreshChatOnDelete'
     ];
 
     protected $rules = [
@@ -37,6 +39,7 @@ class Messaging extends Component
         // Initially queried the DB for all messages here.
         // To improve efficiency the new message is just pushed to the class message array.
         $this->dbMessages[] = $messageToAdd;
+        $this->dispatchBrowserEvent('scrollDown');
 
     }
 
@@ -60,6 +63,17 @@ class Messaging extends Component
         $this->dispatchBrowserEvent('scrollDown');
 
     }
+
+    public function deleteMessage(Message $message, $key){
+        $message->delete();
+        $this->refreshChatOnDelete($key);
+        broadcast(new MessageDeleted($key))->toOthers();
+
+    }
+
+    public function refreshChatOnDelete($key){
+        $this->dbMessages->forget($key);
+}
 
     public function render()
     {
